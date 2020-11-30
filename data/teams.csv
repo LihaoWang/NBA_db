@@ -1,0 +1,31 @@
+tid,name,city,court,conference_name
+1,Atlanta Hawks,Atlanta,State Farm Arena,East
+2,Boston Celtics,Boston,TD Garden,East
+3,Brooklyn Nets,Brooklyn,Barclays Center,East
+4,Charlotte Hornets,Charlotte,Spectrum Center,East
+5,Chicago Bulls,Chicago,United Center,East
+6,Cleveland Cavaliers,Cleveland,Rocket Mortgage FieldHouse,East
+7,Dallas Mavericks,Dallas,American Airlines Center,West
+8,Denver Nuggets,Denver,Pepsi Center,West
+9,Detroit Pistons,Detroit,Little Caesars Arena,East
+10,Golden State Warriors,Oakland,Chase Center,West
+11,Houston Rockets,Houston,Toyota Center,West
+12,Indiana Pacers,Indiana,Bankers Life Fieldhouse,East
+13,Los Angeles Clippers,Los Angeles,Staples Center,West
+14,Los Angeles Lakers,Los Angeles,Staples Center,West
+15,Memphis Grizzlies,Memphis,FedExForum,West
+16,Miami Heat,Miami,American Airlines Arena,East
+17,Milwaukee Bucks,Milwaukee,Fiserv Forum,East
+18,Minnesota Timberwolves,Minnesota,Target Center,West
+19,New Orleans Pelicans,New Orleans,Smoothie King Center,West
+20,New York Knicks,New York,Madison Square Garden,East
+21,Oklahoma City Thunder,Oklahoma City,Chesapeake Energy Arena,West
+22,Orlando Magic,Orlando,Amway Center,East
+23,Philadelphia 76ers,Philadelphia,Wells Fargo Center,East
+24,Phoenix Suns,Phoenix,Talking Stick Resort Arena,West
+25,Portland Trail Blazers,Portland,Moda Center,West
+26,Sacramento Kings,Sacramento,Golden 1 Center,West
+27,San Antonio Spurs,San Antonio,AT&T Center,West
+28,Toronto Raptors,Toronto,Scotiabank Arena,East
+29,Utah Jazz,Utah,Vivint Smart Home Arena,West
+30,Washington Wizards,Washington DC,Capital One Arena,East
