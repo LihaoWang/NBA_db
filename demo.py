@@ -57,17 +57,17 @@ if table_name:
     st.dataframe(df)
 
 
-'## Query owners'
-
-sql_customer_names = 'select name from owners;'
-customer_names = query_db(sql_customer_names)['name'].tolist()
-customer_name = st.selectbox('Choose an owner', customer_names)
-if customer_name:
-    sql_customer = f"select * from owners where name = '{customer_name}';"
-    customer_info = query_db(sql_customer).loc[0]
-#    c_age, c_city, c_state = customer_info['age'], customer_info['city'], customer_info['state']
-    oid=customer_info['oid']
-    st.write(f"{customer_name} is {oid}")
+#'## Query owners'
+#
+#sql_customer_names = 'select name from owners;'
+#customer_names = query_db(sql_customer_names)['name'].tolist()
+#customer_name = st.selectbox('Choose an owner', customer_names)
+#if customer_name:
+#    sql_customer = f"select * from owners where name = '{customer_name}';"
+#    customer_info = query_db(sql_customer).loc[0]
+##    c_age, c_city, c_state = customer_info['age'], customer_info['city'], customer_info['state']
+#    oid=customer_info['oid']
+#    st.write(f"{customer_name} is {oid}")
     
 #'## Query teams from city'
 #sql_team_city= 'select distinct city from teams'
@@ -115,20 +115,35 @@ if player_name_input:
     )
     group by P.name;
     """
-player_max_pts = query_db(sql_max_pts_from_player).loc[0]['maxpoint']
-st.write(f"Max pts in {player_name_input}'s career is {player_max_pts}")
+    player_max_pts = query_db(sql_max_pts_from_player).loc[0]['maxpoint']
+    st.write(f"Max pts in {player_name_input}'s career is {player_max_pts}")
 
-'## Query orders'
+'## Query the highest statistic among all seasons'
+max_stat_list = ('gp', 'gs', 'min', 'pts', 'oreb', 'dr', 'reb', 'ast','stl', 'blk', 'tuov', 'pf', 'ast_tuov', 'per')
+max_stat_selected = st.selectbox('select the stat you want to see', max_stat_list)
+stat_order_selected = st.radio('order by (ascending)', ('season','max_stat'))
+if max_stat_selected and stat_order_selected:
+    sql_max_stat_all_season = f"""
+    select season, MAX({max_stat_selected}) max_stat
+    from statistics S
+    group by season
+    order by {stat_order_selected};
+    """
+    df_f3 = query_db(sql_max_stat_all_season)
+    st.dataframe(df_f3)
 
-sql_order_ids = 'select order_id from orders;'
-order_ids = query_db(sql_order_ids)['order_id'].tolist()
-order_id = st.selectbox('Choose an order', order_ids)
-if order_id:
-    sql_order = f"""select C.name, O.order_date
-                    from orders as O, customers as C 
-                    where O.order_id = {order_id}
-                    and O.customer_id = C.id;"""
-    customer_info = query_db(sql_order).loc[0]
-    customer_name = customer_info['name']
-    order_date = customer_info['order_date']
-    st.write(f'This order is placed by {customer_name} on {order_date}.')
+
+#'## Query orders'
+#
+#sql_order_ids = 'select order_id from orders;'
+#order_ids = query_db(sql_order_ids)['order_id'].tolist()
+#order_id = st.selectbox('Choose an order', order_ids)
+#if order_id:
+#    sql_order = f"""select C.name, O.order_date
+#                    from orders as O, customers as C 
+#                    where O.order_id = {order_id}
+#                    and O.customer_id = C.id;"""
+#    customer_info = query_db(sql_order).loc[0]
+#    customer_name = customer_info['name']
+#    order_date = customer_info['order_date']
+#    st.write(f'This order is placed by {customer_name} on {order_date}.')
