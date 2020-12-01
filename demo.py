@@ -69,14 +69,54 @@ if customer_name:
     oid=customer_info['oid']
     st.write(f"{customer_name} is {oid}")
     
-'## Query teams from city'
-sql_team_city= 'select distinct city from teams'
-city_names = query_db(sql_team_city)['city'].tolist()
-city_name_selected = st.selectbox('choose a city', city_names)
-if city_name_selected:
-    sql_team_name = f"select name from teams where city = '{city_name_selected}';"
-    df = query_db(sql_team_name)
-    st.dataframe(df)
+#'## Query teams from city'
+#sql_team_city= 'select distinct city from teams'
+#city_names = query_db(sql_team_city)['city'].tolist()
+#city_name_selected = st.selectbox('choose a city', city_names)
+#if city_name_selected:
+#    sql_team_name = f"select name from teams where city = '{city_name_selected}';"
+#    df = query_db(sql_team_name)
+#    st.dataframe(df)
+
+'## Query statistics from player name'
+player_names = query_db('select distinct name from players')['name'].tolist()
+player_name_selected = st.selectbox('choose a player', player_names)
+if player_name_selected:
+    sql_statistics_from_name = f"""select S.season, S.gp, S.gs, S.min, S.pts, S.oreb, S.dr, S.reb, S.ast, S.stl, S.blk, S.tuov, S.pf, S.ast_tuov, S.per from statistics S 
+    where S.pid in 
+    (select P.pid from players P where P.name = '{player_name_selected}');"""
+    df_f1 = query_db(sql_statistics_from_name)
+    st.dataframe(df_f1)
+
+'## Query statistics from team name and year'
+team_names = query_db('select distinct name from teams')['name'].tolist()
+team_name_selected = st.selectbox('choose a team', team_names)
+years = query_db('select year from years')['year'].tolist()
+year_selected = st.selectbox('choose a year', years)
+if year_selected and team_name_selected:
+    sql_statistics_from_team_year = f"""select P.name, S.season, S.gp, S.gs, S.min, S.pts, S.oreb, S.dr, S.reb, S.ast, S.stl, S.blk, S.tuov, S.pf, S.ast_tuov, S.per 
+    from statistics S, players P
+    where S.season = {year_selected}
+    and S.pid = P.pid and S.pid in (select pid from plays_in_team PT 
+                                    where PT.year = {year_selected} 
+                                    and PT.tid in (select tid from Teams T 
+                                    where T.name = '{team_name_selected}'));"""
+    df_f2 = query_db(sql_statistics_from_team_year)
+    st.dataframe(df_f2)
+"## Query a player's career max pts"
+player_name_input = st.text_input('player name', 'Andre Iguodala')
+if player_name_input:
+    sql_max_pts_from_player = f"""
+    select MAX(pts) maxpoint, P.name
+    from statistics S, players P
+    where S.pid = P.pid
+    and P.pid in (select P1.pid from players P1
+                where P1.name = '{player_name_input}'
+    )
+    group by P.name;
+    """
+player_max_pts = query_db(sql_max_pts_from_player).loc[0]['maxpoint']
+st.write(f"Max pts in {player_name_input}'s career is {player_max_pts}")
 
 '## Query orders'
 
