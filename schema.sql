@@ -102,14 +102,3 @@ Create table statistics(
 	primary key (pid, season),
 	foreign key (pid) references players(pid) on delete cascade
 );
--- cat years.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY years from STDIN CSV HEADER"
--- cat positions.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY positions from STDIN CSV HEADER"
--- cat conferences.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY conferences from STDIN CSV HEADER"
--- cat owners.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY owners from STDIN CSV HEADER"
--- cat coaches.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY coaches from STDIN CSV HEADER"
--- cat players.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY players from STDIN CSV HEADER"
--- cat teams.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY teams from STDIN CSV HEADER"
--- cat statistics.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY statistics from STDIN CSV HEADER"
--- cat owned_by_owner.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY owned_by_owner from STDIN CSV HEADER"
--- cat coached_by_coach.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY coached_by_coach from STDIN CSV HEADER"
--- cat plays_in_team.csv | psql -U lw1952 -d lw1952-db -h localhost -p 5432 -c "COPY plays_in_team from STDIN CSV HEADER"
