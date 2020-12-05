@@ -143,7 +143,7 @@ if year_selected:
     st.dataframe(df_max_pts_by_conference)
 
 
-'### Single Player Look-up'
+'## Single Player Look-up'
 
 "### Career Best"
 player_name_input = st.text_input("Type player's name", 'Aaron Gordon')

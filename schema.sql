@@ -4,7 +4,7 @@ drop table if exists conferences cascade;
 drop table if exists coaches cascade;
 drop table if exists positions cascade;
 drop table if exists teams cascade;
-drop table if exists owned_by_onwer cascade;
+drop table if exists owned_by_owner cascade;
 drop table if exists coached_by_coach cascade;
 drop table if exists players cascade;
 drop table if exists plays_in_team cascade;
